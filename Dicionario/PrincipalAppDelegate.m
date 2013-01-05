@@ -13,6 +13,95 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //nao podemos guardar tipo primitivos no dicionario
+    //para guardar numeros criamos nsnumber
+    NSNumber *idade = [NSNumber numberWithInt:20];
+    NSNumber *altura = [NSNumber numberWithFloat:1.90];
+    
+    //temos o NSDictionary que e estatico
+    //NSMutableDictionay, dinamico, que permite alteracoes posteriores ao alloc/init
+    NSDictionary *pessoa = [[NSDictionary alloc] initWithObjectsAndKeys:@"Eduardo",@"nome",idade,@"idade", altura, @"altura", nil];
+    
+    NSLog(@"Dicionario criado = %@", pessoa.description);
+    
+    //consultar um bojeto associado a uma chave?
+    NSString *nomeConsultado = [pessoa objectForKey:@"nome"];
+    NSLog(@"Nome consultado: %@", nomeConsultado);
+    
+    
+    //criando um dicionario vazio  para ser manipulado nas proximas linhas
+    NSMutableDictionary *aluno = [[NSMutableDictionary alloc] init];
+    
+    //inserir novos objetos no dicionario?
+    [aluno setObject:@"Gustavo" forKey:@"aluno"];
+    [aluno setObject:idade forKey:@"idade"];
+    [aluno setObject:altura forKey:@"altura"];
+    
+    NSLog(@"Dicionario aluno (mutable)= %@", aluno.description);
+    
+    //alterar um objeto associado a uma chave?
+    //fazemos um setObject:ForKey: utilizando a mesma chave. O objeto ira se sobrepor
+    [aluno setObject:@"Rafael" forKey:@"aluno"];
+    
+    NSLog(@"Dicionario aluno (mutable) = %@", aluno.description);
+    
+    //como remover um objeto de um dicionario?
+    [aluno removeObjectForKey:@"altura"];
+    
+    NSLog(@"Dicionario aluno (mutable) = %@", aluno.description);
+    
+    
+    //guardando dicionarios dentro um array
+    NSMutableArray *listaAlunos = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *aluno1 = [[NSMutableDictionary alloc] init];
+    
+    [aluno1 setObject:@"Viviane" forKey:@"nomeAluno"];
+    [aluno1 setObject:[NSNumber numberWithInt:20] forKey:@"idadeAluno"];
+    
+    //adicionado o dicionario criado no array
+    [listaAlunos addObject:aluno1];
+    
+    NSMutableDictionary *aluno2 = [[NSMutableDictionary alloc] init];
+    
+    [aluno2 setObject:@"Rafael" forKey:@"nomeAluno"];
+    [aluno2 setObject:[NSNumber numberWithInt:21] forKey:@"idadeAluno"];
+    
+    //adicionado o dicionario criado no array
+    [listaAlunos addObject:aluno2];
+    
+    NSMutableDictionary *aluno3 = [[NSMutableDictionary alloc] init];
+    
+    [aluno3 setObject:@"Gustavo" forKey:@"nomeAluno"];
+    [aluno3 setObject:[NSNumber numberWithInt:22] forKey:@"idadeAluno"];
+    
+    //adicionado o dicionario criado no array
+    [listaAlunos addObject:aluno3];
+    
+    NSLog(@"Lista de alunos: %@", listaAlunos.description);
+    
+    //consultar um valor dentro do dicionario e array
+    //recuperando a referencia ao dicionario na posicao 0
+    NSDictionary *alunoConsultado = [listaAlunos objectAtIndex:0];
+    
+    //recuperando uma referencia ao objeto para a chave nomeAluno
+    NSString *nomeAlunoConsultado = [alunoConsultado objectForKey:@"nomeAluno"];
+    
+
+    NSLog(@"Aluno consultado: %@", nomeAlunoConsultado);
+    
+    //TODOS OS NOMES DOS ALUNOs
+    for (int i = 0; i < listaAlunos.count; i++)
+    {
+        NSString *nomeAluno = [[listaAlunos objectAtIndex:i] objectForKey:@"nomeAluno"];
+        NSLog(@"%@", nomeAluno);
+    }
+
+    
+
+    
+    
     return YES;
 }
 							
